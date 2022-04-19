@@ -16,22 +16,18 @@ n = 8;
 tau = T/2;
 omega = 2 * pi/T;
 
-figure('Color', 'White', 'Position', [50 50 960 690]);
-subplot(4, 2, 1);
-f_0 = E * tau / T * (t./t);
-plot(t, f_0, 'LineWidth', 2);
-set(gca, 'FontName', 'Times New Roman', 'FontSize', 10, 'LineWidth', 2);
-xlabel('Time \itt\rm')
-ylabel(['\itf\rm_{', int2str(0), '}(\itt\rm)']);
-title(['方波的直谐分量'],'Fontname','SimHei');
-
-for k = 1 : 7
- Fn = (2 * E * tau / T) * sinc((k) * omega * tau / (2 * pi)); %P88
- f_n = Fn * cos((k) * omega * t); %P79 (3-29)
- subplot(4, 2, k+1);
- plot(t, f_n, 'LineWidth', 2);
- set(gca, 'FontName', 'Times New Roman', 'FontSize', 10, 'LineWidth', 2);
- xlabel('Time \itt\rm')
- ylabel(['\itf\rm_{', int2str(k), '}(\itt\rm)']);
- title(['方波的', int2str(k),'次谐波'],'Fontname','SimHei');
-end
+n = -20:0.01:20;
+n2 = -20:1:20;
+Fn = E * tau ./ T .* sinc(n .* omega * tau/2/pi); %P85 (3-35)
+Fn = -Fn .* (Fn < 0) + Fn .* (Fn >=0);  
+Fn2 = E * tau ./ T .* sinc(n2 .* omega * tau/2/pi); %P85 (3-35)
+Fn2 = -Fn2 .* (Fn2 < 0) + Fn2 .* (Fn2 >=0);
+figure('Color', 'White', 'Position', [100 100 480 240]);
+stem(n2, Fn2,'filled','LineWidth',1.5); 
+hold on
+plot(n, Fn, 'LineWidth', 2);
+grid on
+xlabel(['\omega/\omega_0,\omega_0=',int2str(omega)]);  
+ylabel('|F_n|');
+title('思考题 方波频谱|F_n|({\bf\omega})','Fontname','SimHei');
+set(gca,'gridlinestyle','--','Gridalpha',0.4,'LineWidth',1.5)

@@ -17,7 +17,7 @@ tau = T/2;
 omega = 2 * pi/T;
 Sum = 0;
 f_0 = square(omega .* t + pi /2 ) / 2;  %t(0~Π)=1,t(Π~2Π)=0，……
-figure('Color', 'White', 'Position', [100 100 480 240], 'MenuBar', 'None');
+figure('Color', 'White', 'Position', [100 100 480 240]);
 plot(t, f_0, 'LineWidth', 2);
 axis([-3.5, 3.5, -1, 1]);
 set(gca, 'FontName', 'Times New Roman', 'FontSize', 10, 'LineWidth', 2);
@@ -26,7 +26,7 @@ set(gca, 'YTick', -1 : 0.5 : 1);
 xlabel('Time \itt\rm');
 ylabel('\itf\rm(\itt\rm)');
 title('实验 3-1 对称方波\itf\rm(\itt\rm)','Fontname','SimHei');
-figure('Color', 'White', 'Position', [50 50 960 690], 'MenuBar', 'None');
+figure('Color', 'White', 'Position', [50 50 960 690]);
 for k = 1 : 6
  Fn = (2 * E * tau / T) * sinc((2 * k - 1) * omega * tau / (2 * pi)); %P88
  f_n = Fn * cos((2 * k - 1) * omega * t); %P79 (3-29)
